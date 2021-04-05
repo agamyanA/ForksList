@@ -1,0 +1,7 @@
+<div class="search">
+    <mat-form-field (keydown.enter)="getData()" class="example-full-width search__input">
+        <mat-label>owner/repository name</mat-label>
+        <input (input)="onInput()" id="search" matInput placeholder="Ex. octocat/hello-world">
+      </mat-form-field>
+    <button (click)="getData()" id="button" [disabled]="btnDisabled" mat-raised-button color="primary"><span class="material-icons">search</span></button>
+</div>
