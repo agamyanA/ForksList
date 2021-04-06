@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GetDataService } from '../get-data.service';
 
 @Component({
   selector: 'app-results',
@@ -10,19 +9,13 @@ import { GetDataService } from '../get-data.service';
 
 export class ResultsComponent implements OnInit {
 
-  constructor(private getDataService: GetDataService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   page: number = 1;
 
   ngOnInit(): void {
 
     this.page = this.route.snapshot.queryParams.page;
-    
-    if (this.getDataService.searchValue.length === 0) {
-      this.dataSource = JSON.parse(localStorage.getItem('data')!)
-    } else {
-      this.dataSource = this.getDataService.fetching()
-    }
   }
   
   pageChanged(event: any) {
@@ -31,5 +24,5 @@ export class ResultsComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['Repository', 'Owner', 'Link', 'Stars'];
-  dataSource: any
+  dataSource: any = JSON.parse(localStorage.getItem('data')!)
 }
