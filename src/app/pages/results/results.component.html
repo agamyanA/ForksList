@@ -1,0 +1,86 @@
+<section class="results">
+  <app-search class="results__search"></app-search>
+
+  <section 
+    *ngIf='!(isError | async)'
+    class="results__content">
+    <mat-table
+      [dataSource]="dataSource | async | paginate: { itemsPerPage: 30, currentPage: currentPage | async, totalItems: totalItems | async}"
+      class="mat-elevation-z8 results__table">
+
+    <!-- Repository Column -->
+    <ng-container matColumnDef="Repository">
+      <mat-header-cell *matHeaderCellDef> Repository </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div *ngIf='isDataLoaded | async'> {{element.full_name}} </div>
+        <ngx-skeleton-loader
+          *ngIf='!(isDataLoaded | async)'
+          count='1'
+          [theme]="{height: '20px', width: '200px'}">
+        </ngx-skeleton-loader>
+      </mat-cell>
+    </ng-container>
+    
+    <!-- Owner Column -->
+    <ng-container matColumnDef="Owner">
+      <mat-header-cell *matHeaderCellDef> Owner </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div *ngIf='isDataLoaded | async'> {{element.owner.login}} </div>
+        <ngx-skeleton-loader 
+          *ngIf='!(isDataLoaded | async)'
+          count='1'
+          [theme]="{height: '20px', width: '200px'}">
+        </ngx-skeleton-loader>
+      </mat-cell>
+    </ng-container>
+    
+    <!-- Link Column -->
+    <ng-container matColumnDef="Link">
+      <mat-header-cell *matHeaderCellDef> Link </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a 
+          *ngIf='isDataLoaded | async'
+          class="results__link"
+          href="{{element.html_url}}">
+          Link to fork
+        </a>
+        <ngx-skeleton-loader 
+          *ngIf='!(isDataLoaded | async)'
+          count='1'
+          [theme]="{height: '20px', width: '200px'}">
+        </ngx-skeleton-loader>
+      </mat-cell>
+    </ng-container>
+    
+    <!-- Stars Column -->
+    <ng-container matColumnDef="Stars">
+      <mat-header-cell *matHeaderCellDef  class="results__star"> Stars </mat-header-cell>
+      <mat-cell *matCellDef="let element"  class="results__star">
+        <div *ngIf='isDataLoaded | async'> {{element.stargazers_count}} </div>
+        <ngx-skeleton-loader
+          *ngIf='!(isDataLoaded | async)'
+          count='1'
+          [theme]="{height: '20px', width: '30px'}">
+        </ngx-skeleton-loader>
+      </mat-cell>
+    </ng-container>
+    
+    <mat-header-row @rowAnimation *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row @rowAnimation *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <pagination-controls
+      (pageChange)="pageChanged($event)"
+      (pageBoundsCorrection)="showError()"
+      class="results__pagination">
+    </pagination-controls>
+
+  </section>
+
+  <p
+    *ngIf='isError | async'
+    class="results__error">
+    {{ onErrorText }}
+  </p>
+
+</section>

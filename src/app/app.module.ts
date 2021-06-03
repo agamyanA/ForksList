@@ -3,19 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { NgxPaginationModule } from 'ngx-pagination'
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './shared/material.module';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { AppComponent } from './app.component';
-import { SearchComponent } from './search/search.component';
-import { HomeComponent } from './home/home.component';
-import { ResultsComponent } from './results/results.component';
-import { GetDataService } from './get-data.service';
-import { NoresultsComponent } from './noresults/noresults.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SearchComponent } from './shared/components/search/search.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ResultsComponent } from './pages/results/results.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+
+import { IsValidInputPipe } from './utils/is-valid-input.pipe';
 
 @NgModule({
   declarations: [
@@ -23,20 +21,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SearchComponent,
     HomeComponent,
     ResultsComponent,
-    NoresultsComponent,
     PageNotFoundComponent,
+    IsValidInputPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatTableModule,
     HttpClientModule,
-    NgxPaginationModule
+    ReactiveFormsModule,
+    MaterialModule,
+    NgxSkeletonLoaderModule
   ],
-  providers: [GetDataService, ResultsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,21 @@
+<form 
+  [formGroup]='searchForm'
+  (ngSubmit)='onSubmit()'
+  class="form">
+
+  <mat-form-field class="example-full-width form__field">
+    <mat-label>owner/repository name</mat-label>
+    <input
+      formControlName='input'
+      matInput
+      placeholder="Ex. octocat/hello-world">
+  </mat-form-field>
+  <button 
+      [disabled]="inputValue | async | isValidInput"
+      mat-raised-button
+      class="form__btn"
+      color="primary">
+      <span class="material-icons">search</span>
+  </button>
+
+</form>

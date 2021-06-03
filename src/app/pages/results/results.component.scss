@@ -1,0 +1,73 @@
+.results {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+
+    &__content {
+        display: grid;
+        place-items: center;
+    }
+
+    &__search {
+        width: 50%;
+        text-align: center;
+        font-size: clamp(0.6rem, 0.8vw, 0.9rem);
+    }
+
+    &__table {
+        margin-top: 2rem;
+        max-height: 60vh;
+        overflow-y: auto;
+        border-radius: 10px;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: #3f51b5;
+    }
+
+    &__star {
+        max-width: 2rem;
+        margin-right: clamp(0rem, 0.8vw, 0.9rem);
+    }
+
+    &__pagination {
+        padding-top: 1.5rem;
+        font-size: clamp(0.6rem, 0.8vw, 0.9rem);
+
+        &::ng-deep .ngx-pagination .current {
+            background: #3f51b5;
+            border-radius: 5px;
+        }
+
+        &::ng-deep .ngx-pagination {
+            padding-left: 0;
+        }
+    }
+
+    &__error {
+        display: grid;
+        place-items: center;
+        margin-top: 2rem;
+        width: clamp(18rem, 50vw, 40rem);
+        height: 10vh;
+        font-size: clamp(0.6rem, 1.5vw, 1.5rem);
+        background: white;
+        box-shadow: -5px 5px 5px rgba(0, 0, 0, .3);
+        border-radius: 10px;
+    }
+}
+
+mat-cell, mat-header-cell {
+    font-size: clamp(0.6rem, 0.8vw, 0.9rem);
+    width: clamp(5rem, 21vw, 18rem);
+}
+
+mat-row, mat-header-row {
+    gap: 0.55rem;
+}
+
+mat-cell:last-of-type, mat-header-cell:last-of-type {
+    padding-right: 0.2rem;
+}
