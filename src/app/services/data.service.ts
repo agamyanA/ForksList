@@ -55,10 +55,13 @@ export class DataService {
       )
 
     params.subscribe((param) => {
+      const [searchParams, currentPage] = param
+
       if (forForksCount) {
-        this.getForksCount(param[0].owner, param[0].repo)
+        console.log(param)
+        this.getForksCount(searchParams.owner, searchParams.repo)
       } 
-        this.getSearchResult(param[0].owner, param[0].repo, param[1])
+        this.getSearchResult(searchParams.owner, searchParams.repo, currentPage)
     })
   }
 }

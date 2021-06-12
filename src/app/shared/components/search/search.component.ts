@@ -21,8 +21,7 @@ export class SearchComponent implements OnInit {
     private router: Router
   ) {}
 
-  inputValue!: Observable<any>  
-  searchInfo: string[] = []
+  inputValue!: Observable<any>
   searchForm: FormGroup = this.fb.group({
     input: null
   })
@@ -36,10 +35,8 @@ export class SearchComponent implements OnInit {
   }
 
   onSubmit() {
-    this.searchInfo = this.input.value.split('/')
-
-    const [owner, repo] = [...this.searchInfo]
-
+    const [owner, repo] = this.input.value.split('/')
+    
     this.store.setSearchParams({
       owner: owner.trim(),
        repo: repo.trim()
