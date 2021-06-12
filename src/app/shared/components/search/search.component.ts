@@ -37,9 +37,12 @@ export class SearchComponent implements OnInit {
 
   onSubmit() {
     this.searchInfo = this.input.value.split('/')
+
+    const [owner, repo] = [...this.searchInfo]
+
     this.store.setSearchParams({
-      owner: this.searchInfo[0].trim(),
-       repo: this.searchInfo[1].trim()
+      owner: owner.trim(),
+       repo: repo.trim()
     })
     this.store.setPage(1)
     this.data.search(true)
